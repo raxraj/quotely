@@ -1,5 +1,5 @@
 import './Quotes.css'
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 let Quotes = () => {
@@ -7,36 +7,27 @@ let Quotes = () => {
     let [quote, setQuote] = useState({})
 
     let loadQuote = () => {
-        axios.get('https://api.quotable.io/random',{
+        axios.get('https://api.quotable.io/random', {
             params: {
                 maxLength: 150
             }
         })
-        .then(response=>{
-            setQuote(response.data)
-        })
+            .then(response => {
+                setQuote(response.data)
+            })
     }
-    useEffect(loadQuote,[])
+    useEffect(loadQuote, [])
 
     return (
         <div className="container">
-            <div className="quoteBox">
-                <div className="quote">
-                    <span className="inverted">
-                        "
-                    </span>
-                    {quote.content}
-                    <span className="inverted">
-                        "
-                    </span>
-                </div>
-                <div className="author">
-                    - {quote.author}
+            <div className="blockquote-wrapper">
+                <div className="blockquote">
+                    <h1>
+                        {quote.content}
+                    </h1>
+                    <h4> - {quote.author} </h4>
                 </div>
             </div>
-            <button class="bttn-fill bttn-lg bttn-primary"
-                onClick = {loadQuote}
-            >Next Quote</button>
         </div>
     )
 }
